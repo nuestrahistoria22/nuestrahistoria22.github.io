@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gonzalo & Marcela — Nuestra historia</title>
+<meta name="description" content="El sitio de Gonzalo y Marcela: nuestra historia, recuerdos y todo lo que viene.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Caveat:wght@500;600;700&family=Allura&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:        #630100;
+    --paper:      #fff7ec;
+    --paper-2:    #f7ead6;
+    --cream:      #630100;
+    --cream-soft: #8a3a30;
+    --wine:       #630100;
+    --wine-deep:  #450000;
+    --olive:      #5c6b4f;
+    --gold:       #a9763f;
+    --terracotta: var(--wine);
+    --terracotta-deep: var(--wine-deep);
+    --line:       rgba(99,1,0,0.16);
+    --card-shadow: 0 18px 40px rgba(99,1,0,0.12);
+    --radius: 18px;
+    --serif: 'Cormorant Garamond', serif;
+    --hand:  'Caveat', cursive;
+    --script: 'Allura', cursive;
+    --sans:  'Jost', sans-serif;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--cream);
+    font-family:var(--sans);
+    font-weight:300;
+    overflow-x:hidden;
+  }
+
+  ::selection{ background:var(--gold); color:var(--ink); }
+
+  a{ color:inherit; }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .8s ease, transform .8s ease;
+  }
+  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  /* ============ BANNER / HERO ============ */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:7vh 6vw 8vh;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(169,118,63,0.1), transparent 55%),
+      var(--paper);
+    color:var(--ink);
+  }
+
+  .hero-photos{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    opacity:0.04;
+    background-image:
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)" opacity="0.18"/></svg>');
+    background-size:cover;
+  }
+
+  .hero-eyebrow{
+    position:relative;
+    font-family:var(--sans);
+    letter-spacing:.34em;
+    font-size:.68rem;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:1.6rem;
+  }
+
+  .hero-names{
+    position:relative;
+    font-family:var(--script);
+    font-weight:400;
+    font-size:clamp(3.4rem, 13vw, 8.5rem);
+    line-height:1.05;
+    margin:0;
+    margin-top:.5rem;
+    color:var(--ink);
+  }
+  .hero-amp{
+    display:inline-block;
+    font-family:var(--script);
+    font-size:.62em;
+    color:var(--gold);
+    margin:0 .15em;
+    transform:translateY(-.02em);
+  }
+
+  .hero-sub{
+    position:relative;
+    font-family:var(--hand);
+    font-size:clamp(1.4rem, 3vw, 2.1rem);
+    color:var(--cream-soft);
+    margin-top:1rem;
+  }
+
+  .hero-date{
+    position:relative;
+    margin-top:2.6rem;
+    font-family:var(--sans);
+    font-size:.78rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--cream-soft);
+    display:flex;
+    align-items:center;
+    gap:.9rem;
+  }
+  .hero-date::before, .hero-date::after{
+    content:'';
+    width:34px;
+    height:1px;
+    background:rgba(169,118,63,0.5);
+  }
+
+  .hero-counter{
+    position:relative;
+    margin-top:3rem;
+    display:flex;
+    gap:clamp(.6rem,2vw,1.4rem);
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .counter-box{
+    background:rgba(99,1,0,0.04);
+    border:1px solid rgba(99,1,0,0.18);
+    backdrop-filter:blur(6px);
+    border-radius:14px;
+    padding:.9rem 1.1rem;
+    min-width:74px;
+  }
+  .counter-num{
+    font-family:var(--serif);
+    font-size:clamp(1.6rem,4vw,2.4rem);
+    font-weight:600;
+    color:var(--ink);
+    line-height:1;
+  }
+  .counter-label{
+    font-size:.62rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--cream-soft);
+    margin-top:.35rem;
+  }
+
+  .hero-milestone{
+    position:relative;
+    margin-top:1.4rem;
+    font-size:.74rem;
+    color:var(--cream-soft);
+    font-style:italic;
+    font-family:var(--serif);
+    letter-spacing:.02em;
+  }
+  .hero-milestone strong{ color:var(--gold); font-weight:600; }
+
+  .scroll-cue{
+    position:absolute;
+    bottom:2.2rem;
+    left:50%;
+    transform:translateX(-50%);
+    width:1px;
+    height:46px;
+    background:linear-gradient(180deg, rgba(169,118,63,0.7), transparent);
+    animation:scrollPulse 2.2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse{
+    0%,100%{ opacity:.3; }
+    50%{ opacity:1; }
+  }
+
+  /* ============ NAV APARTADOS ============ */
+  .nav-wrap{
+    position:sticky;
+    top:0;
+    z-index:40;
+    background:rgba(255,247,236,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1040px;
+    margin:0 auto;
+    display:flex;
+    justify-content:center;
+    gap:clamp(.2rem,2vw,1rem);
+    padding:.85rem 1rem;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .nav-inner::-webkit-scrollbar{ display:none; }
+  .nav-link{
+    text-decoration:none;
+    font-size:.74rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink);
+    opacity:.6;
+    white-space:nowrap;
+    padding:.5rem .9rem;
+    border-radius:999px;
+    transition:all .3s ease;
+    font-family:var(--sans);
+  }
+  .nav-link:hover{ opacity:1; background:var(--paper-2); }
+  .nav-link.active{
+    opacity:1;
+    background:var(--ink);
+    color:var(--paper);
+  }
+
+  /* ============ SECTION SHELL ============ */
+  section{
+    padding:7rem 6vw;
+    max-width:1040px;
+    margin:0 auto;
+  }
+  .section-head{
+    text-align:center;
+    margin-bottom:3.6rem;
+  }
+  .section-eyebrow{
+    font-family:var(--script);
+    font-size:2rem;
+    color:var(--gold);
+    display:block;
+    margin-bottom:.2rem;
+  }
+  .section-title{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(2rem,4vw,2.8rem);
+    margin:0;
+    color:var(--ink);
+  }
+  .section-rule{
+    width:64px;
+    height:2px;
+    background:var(--gold);
+    margin:1.1rem auto 0;
+    border-radius:2px;
+  }
+
+  /* ============ NOSOTROS / GALERÍA ============ */
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1rem;
+  }
+  .gallery figure{
+    margin:0;
+    border-radius:var(--radius);
+    overflow:hidden;
+    aspect-ratio:4/5;
+    background:var(--paper-2);
+    box-shadow:var(--card-shadow);
+    position:relative;
+  }
+  .gallery img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform .6s ease;
+  }
+  .gallery figure:hover img{ transform:scale(1.06); }
+  .gallery figure.placeholder{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    color:var(--cream-soft);
+    opacity:.55;
+    font-family:var(--sans);
+    font-size:.72rem;
+    letter-spacing:.08em;
+    text-align:center;
+    gap:.4rem;
+    padding:1rem;
+    border:1.5px dashed var(--line);
+  }
+  .gallery figure.placeholder svg{ width:28px; height:28px; opacity:.7; }
+
+  .intro-text{
+    max-width:640px;
+    margin:0 auto 3rem;
+    text-align:center;
+    font-family:var(--serif);
+    font-size:1.25rem;
+    font-style:italic;
+    line-height:1.7;
+    color:var(--cream-soft);
+  }
+
+  /* ============ TIMELINE ============ */
+  .timeline-section{ background:var(--paper-2); }
+  .timeline{
+    position:relative;
+    max-width:760px;
+    margin:0 auto;
+    padding-left:2rem;
+  }
+  .timeline::before{
+    content:'';
+    position:absolute;
+    left:7px;
+    top:8px;
+    bottom:8px;
+    width:2px;
+    background:repeating-linear-gradient(180deg, var(--ink) 0 6px, transparent 6px 12px);
+  }
+  .tl-item{
+    position:relative;
+    padding-bottom:2.6rem;
+  }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-dot{
+    position:absolute;
+    left:-2rem;
+    top:.3rem;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--ink);
+    cursor:pointer;
+    transition:transform .3s ease, background .3s ease;
+  }
+  .tl-dot:hover{ transform:scale(1.2); }
+  .tl-dot.open{ background:var(--ink); }
+
+  .tl-date{
+    font-family:var(--hand);
+    font-size:1.5rem;
+    color:var(--gold);
+    margin:0 0 .2rem;
+  }
+  .tl-title{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:1.3rem;
+    margin:0 0 .5rem;
+    color:var(--ink);
+  }
+  .tl-trigger{
+    display:inline-flex;
+    align-items:center;
+    gap:.5rem;
+    background:none;
+    border:none;
+    cursor:pointer;
+    font-family:var(--sans);
+    font-size:.78rem;
+    letter-spacing:.05em;
+    color:var(--cream-soft);
+    padding:0;
+    opacity:.85;
+  }
+  .tl-trigger:hover{ opacity:1; }
+  .tl-trigger .heart{
+    font-size:1.05rem;
+    color:var(--ink);
+    transition:transform .25s ease;
+  }
+  .tl-trigger:hover .heart{ transform:scale(1.25); }
+
+  .tl-reveal{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .5s ease, margin-top .5s ease;
+  }
+  .tl-reveal.open{
+    max-height:400px;
+    margin-top:1rem;
+  }
+  .tl-reveal-inner{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:1.1rem 1.3rem;
+    font-family:var(--serif);
+    font-size:1.05rem;
+    font-style:italic;
+    line-height:1.6;
+    color:var(--cream-soft);
+    box-shadow:var(--card-shadow);
+  }
+
+  /* ============ CALENDARIO ============ */
+  .calendar-card{
+    background:var(--ink);
+    color:var(--paper);
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:clamp(2rem,5vw,3.5rem);
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .calendar-card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at 50% 0%, rgba(169,118,63,0.22), transparent 60%);
+  }
+  .cal-label{
+    position:relative;
+    font-family:var(--script);
+    font-size:2.1rem;
+    color:var(--gold);
+  }
+  .cal-event{
+    position:relative;
+    font-family:var(--serif);
+    font-size:clamp(1.6rem,3.4vw,2.2rem);
+    margin:.4rem 0 1.8rem;
+    color:var(--paper);
+  }
+  .cal-countdown{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    gap:clamp(.5rem,2vw,1.2rem);
+    flex-wrap:wrap;
+  }
+  .cal-unit{ min-width:70px; }
+  .cal-unit .num{
+    font-family:var(--serif);
+    font-size:clamp(1.8rem,4vw,2.6rem);
+    font-weight:600;
+    color:var(--paper);
+  }
+  .cal-unit .lab{
+    font-size:.62rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#e3c9a8;
+    margin-top:.3rem;
+  }
+  .cal-note{
+    position:relative;
+    margin-top:2rem;
+    font-size:.82rem;
+    color:#e3c9a8;
+    font-style:italic;
+  }
+
+  /* ============ RECUERDOS / GRID FUTURO ============ */
+  .apartados-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.4rem;
+  }
+  .apartado-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:2.2rem 1.6rem;
+    text-align:center;
+    transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  }
+  .apartado-card:hover{
+    transform:translateY(-6px);
+    box-shadow:var(--card-shadow);
+    border-color:var(--gold);
+  }
+  .apartado-icon{
+    width:44px;
+    height:44px;
+    margin:0 auto 1.1rem;
+    color:var(--ink);
+  }
+  .apartado-icon svg{ width:100%; height:100%; }
+  .apartado-title{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:1.25rem;
+    margin:0 0 .5rem;
+    color:var(--ink);
+  }
+  .apartado-desc{
+    font-size:.85rem;
+    line-height:1.6;
+    color:var(--cream-soft);
+    margin:0;
+  }
+  .apartado-card.locked{ opacity:.55; }
+  .apartado-tag{
+    display:inline-block;
+    margin-top:.9rem;
+    font-size:.62rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    padding:.25rem .7rem;
+    border-radius:999px;
+    background:var(--paper-2);
+    color:var(--ink);
+  }
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:var(--ink);
+    color:#e3c9a8;
+    text-align:center;
+    padding:3.5rem 6vw 2.5rem;
+    border-top:1px solid var(--line);
+  }
+  .footer-names{
+    font-family:var(--script);
+    font-size:2.2rem;
+    color:var(--paper);
+  }
+  .footer-sub{
+    font-size:.72rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    margin-top:.6rem;
+    opacity:.7;
+  }
+  .footer-heart{
+    margin-top:1.4rem;
+    color:var(--gold);
+    font-size:1.1rem;
+  }
+
+  @media (max-width:760px){
+    .gallery{ grid-template-columns:repeat(2,1fr); }
+    .apartados-grid{ grid-template-columns:1fr; }
+    section{ padding:5rem 6vw; }
+  }
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO / BANNER ============ -->
+<header class="hero" id="inicio">
+  <div class="hero-photos" aria-hidden="true"></div>
+  <h1 class="hero-names">Gonzalo<span class="hero-amp">&amp;</span>Marcela</h1>
+  <p class="hero-sub">una historia que seguimos escribiendo</p>
+  <p class="hero-date">22 de mayo, 2026</p>
+
+  <div class="hero-counter" aria-label="Días juntos">
+    <div class="counter-box">
+      <div class="counter-num" id="c-dias">0</div>
+      <div class="counter-label">Días</div>
+    </div>
+    <div class="counter-box">
+      <div class="counter-num" id="c-meses">0</div>
+      <div class="counter-label">Meses aprox.</div>
+    </div>
+    <div class="counter-box">
+      <div class="counter-num" id="c-anios">0</div>
+      <div class="counter-label">Años aprox.</div>
+    </div>
+  </div>
+
+  <p class="hero-milestone">Desde el 02 de septiembre de 2023 hasta hoy — el <strong>28 de mayo de 2026</strong> cumplimos nuestros primeros 1.000 días juntos 🤍</p>
+
+  <span class="scroll-cue" aria-hidden="true"></span>
+</header>
+
+<!-- ============ NAV ============ -->
+<nav class="nav-wrap" aria-label="Secciones del sitio">
+  <div class="nav-inner">
+    <a class="nav-link" href="#inicio">Inicio</a>
+    <a class="nav-link" href="#nosotros">Nosotros</a>
+    <a class="nav-link" href="#historia">Historia</a>
+    <a class="nav-link" href="#calendario">Calendario</a>
+    <a class="nav-link" href="#recuerdos">Recuerdos</a>
+  </div>
+</nav>
+
+<!-- ============ NOSOTROS ============ -->
+<section id="nosotros" class="reveal">
+  <div class="section-head">
+    <span class="section-eyebrow">quiénes somos</span>
+    <h2 class="section-title">Nosotros</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <p class="intro-text">Gonzalo y Marcela. Un 22 de mayo de 2026 firmamos nuestro acuerdo de unión civil, pero la historia empezó mucho antes — y este rincón es para guardarla, foto a foto, recuerdo a recuerdo.</p>
+
+  <div class="gallery">
+    <figure class="placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span>Foto 1<br>reemplázame</span>
+    </figure>
+    <figure class="placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span>Foto 2<br>reemplázame</span>
+    </figure>
+    <figure class="placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span>Foto 3<br>reemplázame</span>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ HISTORIA / TIMELINE ============ -->
+<section id="historia" class="timeline-section reveal">
+  <div class="section-head">
+    <span class="section-eyebrow">cómo llegamos hasta aquí</span>
+    <h2 class="section-title">Nuestra historia</h2>
+    <div class="section-rule"></div>
+    <p style="font-size:.82rem; color:var(--cream-soft); margin-top:1rem;">Toca el corazón junto a cada fecha para abrir el recuerdo.</p>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <span class="tl-dot" aria-hidden="true"></span>
+      <p class="tl-date">02 de septiembre, 2023</p>
+      <h3 class="tl-title">El día uno</h3>
+      <button class="tl-trigger" data-target="rec1" aria-expanded="false">
+        <span class="heart">♥</span> Ver el recuerdo
+      </button>
+      <div class="tl-reveal" id="rec1">
+        <div class="tl-reveal-inner">
+          Aquí va el recuerdo de ese primer día. Edita este texto y cuenta cómo empezó todo: dónde estaban, qué sintieron, qué dijeron. Puedes agregar una foto más adelante.
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <span class="tl-dot" aria-hidden="true"></span>
+      <p class="tl-date">2024</p>
+      <h3 class="tl-title">Un año juntos</h3>
+      <button class="tl-trigger" data-target="rec2" aria-expanded="false">
+        <span class="heart">♥</span> Ver el recuerdo
+      </button>
+      <div class="tl-reveal" id="rec2">
+        <div class="tl-reveal-inner">
+          Espacio para el recuerdo de este momento. Reemplaza este texto con la historia real: un viaje, una fecha especial, una anécdota que quieran guardar.
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <span class="tl-dot" aria-hidden="true"></span>
+      <p class="tl-date">28 de mayo, 2026</p>
+      <h3 class="tl-title">1.000 días</h3>
+      <button class="tl-trigger" data-target="rec3" aria-expanded="false">
+        <span class="heart">♥</span> Ver el recuerdo
+      </button>
+      <div class="tl-reveal" id="rec3">
+        <div class="tl-reveal-inner">
+          Mil días juntos, contados desde el 02-09-2023. Un buen lugar para escribir qué sintieron al llegar a este número.
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <span class="tl-dot" aria-hidden="true"></span>
+      <p class="tl-date">22 de mayo, 2026</p>
+      <h3 class="tl-title">Firmamos nuestro acuerdo civil</h3>
+      <button class="tl-trigger" data-target="rec4" aria-expanded="false">
+        <span class="heart">♥</span> Ver el recuerdo
+      </button>
+      <div class="tl-reveal" id="rec4">
+        <div class="tl-reveal-inner">
+          El día en que lo hicimos oficial. Cuenta cómo fue la firma, quiénes los acompañaron, cómo se sintieron al salir de ahí ya como familia.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ CALENDARIO ============ -->
+<section id="calendario" class="reveal">
+  <div class="section-head">
+    <span class="section-eyebrow">lo que viene</span>
+    <h2 class="section-title">Calendario</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="calendar-card">
+    <p class="cal-label">próxima fecha importante</p>
+    <p class="cal-event">Nuestro primer aniversario · 22 mayo 2027</p>
+    <div class="cal-countdown" id="countdown">
+      <div class="cal-unit"><div class="num" id="cd-d">0</div><div class="lab">días</div></div>
+      <div class="cal-unit"><div class="num" id="cd-h">0</div><div class="lab">horas</div></div>
+      <div class="cal-unit"><div class="num" id="cd-m">0</div><div class="lab">min</div></div>
+      <div class="cal-unit"><div class="num" id="cd-s">0</div><div class="lab">seg</div></div>
+    </div>
+    <p class="cal-note">Este apartado se puede ir llenando con más fechas: cumpleaños, viajes, aniversarios.</p>
+  </div>
+</section>
+
+<!-- ============ RECUERDOS / APARTADOS FUTUROS ============ -->
+<section id="recuerdos" class="reveal">
+  <div class="section-head">
+    <span class="section-eyebrow">nuestro espacio</span>
+    <h2 class="section-title">Recuerdos &amp; más</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="apartados-grid">
+
+    <div class="apartado-card">
+      <div class="apartado-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/><circle cx="12" cy="15" r="2"/></svg>
+      </div>
+      <h3 class="apartado-title">Calendario</h3>
+      <p class="apartado-desc">Fechas importantes, aniversarios y cuentas regresivas para lo que viene.</p>
+      <span class="apartado-tag">Disponible</span>
+    </div>
+
+    <div class="apartado-card">
+      <div class="apartado-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 21s-7-4.5-9.5-9C.5 8 2 4 6 4c2.2 0 3.6 1.3 6 3.6C14.4 5.3 15.8 4 18 4c4 0 5.5 4 3.5 8-2.5 4.5-9.5 9-9.5 9z"/></svg>
+      </div>
+      <h3 class="apartado-title">Historia</h3>
+      <p class="apartado-desc">La línea de tiempo con cada recuerdo, fecha a fecha, momento a momento.</p>
+      <span class="apartado-tag">Disponible</span>
+    </div>
+
+    <div class="apartado-card">
+      <div class="apartado-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </div>
+      <h3 class="apartado-title">Galería de fotos</h3>
+      <p class="apartado-desc">Un álbum que va a ir creciendo con cada viaje, celebración y momento simple.</p>
+      <span class="apartado-tag">Disponible</span>
+    </div>
+
+    <div class="apartado-card locked">
+      <div class="apartado-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2l2.4 6.9H21l-5.6 4.3L17.6 20 12 15.9 6.4 20l2.2-6.8L3 8.9h6.6z"/></svg>
+      </div>
+      <h3 class="apartado-title">Lista de sueños</h3>
+      <p class="apartado-desc">Lugares por conocer, planes y metas como pareja.</p>
+      <span class="apartado-tag">Próximamente</span>
+    </div>
+
+    <div class="apartado-card locked">
+      <div class="apartado-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 20l-1.5-1.4C5.4 14.2 2 11.1 2 7.3 2 4.6 4.1 2.5 6.8 2.5c1.5 0 3 .7 4 1.9.9-1.2 2.4-1.9 4-1.9 2.7 0 4.8 2.1 4.8 4.8 0 3.8-3.4 6.9-8.5 11.3L12 20z"/></svg>
+      </div>
+      <h3 class="apartado-title">Cartas</h3>
+      <p class="apartado-desc">Mensajes que nos vamos dejando, abiertos cuando el otro quiera leerlos.</p>
+      <span class="apartado-tag">Próximamente</span>
+    </div>
+
+    <div class="apartado-card locked">
+      <div class="apartado-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      </div>
+      <h3 class="apartado-title">Cápsula del tiempo</h3>
+      <p class="apartado-desc">Cosas que escribimos hoy, para leer juntos en una fecha futura.</p>
+      <span class="apartado-tag">Próximamente</span>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p class="footer-names">Gonzalo &amp; Marcela</p>
+  <p class="footer-sub">22 · 05 · 2026</p>
+  <p class="footer-heart">♥</p>
+</footer>
+
+<script>
+  // ============ Contador de días (hora de Chile) ============
+  // Inicio de la relación: 02-09-2023. Llegan a 1000 días el 28-05-2026.
+  const INICIO_RELACION = '2023-09-02T00:00:00-04:00'; // referencia horaria Chile (ajusta -03:00/-04:00 según temporada si lo deseas)
+
+  function getChileNow(){
+    // Hora actual expresada según el huso horario de Santiago de Chile
+    const fmt = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/Santiago',
+      year:'numeric', month:'2-digit', day:'2-digit',
+      hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false
+    });
+    const parts = fmt.formatToParts(new Date());
+    const get = t => parts.find(p => p.type === t).value;
+    return new Date(`${get('year')}-${get('month')}-${get('day')}T${get('hour')}:${get('minute')}:${get('second')}`);
+  }
+
+  function actualizarContadorDias(){
+    const inicio = new Date('2023-09-02T00:00:00');
+    const ahoraChile = getChileNow();
+    const msPorDia = 1000 * 60 * 60 * 24;
+    const dias = Math.floor((ahoraChile - inicio) / msPorDia) + 1;
+
+    const anios = Math.floor(dias / 365.25);
+    const meses = Math.floor((dias % 365.25) / 30.44);
+
+    document.getElementById('c-dias').textContent = dias.toLocaleString('es-CL');
+    document.getElementById('c-meses').textContent = meses;
+    document.getElementById('c-anios').textContent = anios;
+  }
+
+  actualizarContadorDias();
+  // Revisa cada minuto para refrescar justo al pasar la medianoche chilena
+  setInterval(actualizarContadorDias, 60 * 1000);
+
+  // ============ Cuenta regresiva próximo aniversario ============
+  const proximaFecha = new Date('2027-05-22T00:00:00-04:00');
+
+  function actualizarCountdown(){
+    const ahora = new Date();
+    let diff = proximaFecha - ahora;
+    if(diff < 0) diff = 0;
+
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff / (1000*60*60)) % 24);
+    const m = Math.floor((diff / (1000*60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('cd-d').textContent = d;
+    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+  }
+  actualizarCountdown();
+  setInterval(actualizarCountdown, 1000);
+
+  // ============ Timeline: abrir/cerrar recuerdos ============
+  document.querySelectorAll('.tl-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.target);
+      const dot = btn.closest('.tl-item').querySelector('.tl-dot');
+      const isOpen = target.classList.toggle('open');
+      dot.classList.toggle('open', isOpen);
+      btn.setAttribute('aria-expanded', isOpen);
+      btn.querySelector('.heart').textContent = isOpen ? '♥' : '♥';
+    });
+  });
+
+  // También se puede abrir el recuerdo tocando el punto de la línea de tiempo
+  document.querySelectorAll('.tl-dot').forEach(dot => {
+    dot.addEventListener('click', () => {
+      const btn = dot.closest('.tl-item').querySelector('.tl-trigger');
+      btn.click();
+    });
+  });
+
+  // ============ Scroll reveal ============
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ============ Nav activo según sección visible ============
+  const sections = document.querySelectorAll('section[id], header[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(sec => navObserver.observe(sec));
+</script>
+
+</body>
+</html>
